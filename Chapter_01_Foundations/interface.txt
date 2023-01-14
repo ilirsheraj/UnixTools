@@ -64,4 +64,5 @@ $ ls -l
 # documentation for ls command
 $ man ls
 
+# built-in help
 $ sleep --help
