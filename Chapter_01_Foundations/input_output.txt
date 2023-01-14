@@ -1,0 +1,23 @@
+# Create a new file with the following text
+$ echo If you can keep your head when all about you > if-1
+# check the output
+$ cat if-1
+
+# Add a second line to the file
+$ echo Are losing theirs and blaming it on you >> if-1
+$ cat if-1
+
+# create another file in the same way
+$ echo If you can trust yourself when all men doubt you > if-2
+$ cat if-2
+
+# Add another line
+$ echo But make allowance for their doubting too >> if-2
+$ cat if-2
+
+# Read both files at once
+$ cat if-1 if-2
+
+# Create a third file with the output of if-1 and if-2
+$ cat if-1 if-2 > if
+$ cat if
