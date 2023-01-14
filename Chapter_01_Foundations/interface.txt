@@ -1,0 +1,67 @@
+# Print hellow world
+$ echo hello world!
+hello world
+# print anything else
+$ echo a    b
+a b
+
+# get todays date
+$ date
+Sat Jan 14 07:32:38 PM CET 2023
+
+# Editing
+# create "a-file" file
+$ touch a-file
+$ touch a-file-with-a-longer-name
+# see all the files inside a specific folder
+$ ls
+a-file  a-file-with-a-longer-name
+
+# Interrupt execution
+$ sleep 60 # Wait for 60 seconds
+^C   ctrl+c to interrupt the execution
+
+# Command options
+# create two files
+$ touch a
+$ touch b
+# list them
+$ ls
+a  b
+
+# Specify option to list files in long format
+$ ls -l
+total 0
+-rw-r--r-- 1 dds None 0 Jan 14 07:32 a
+-rw-r--r-- 1 dds None 0 Jan 14 07:33 b
+
+# Specify option to list files in reverse order
+$ ls -r
+b  a
+
+# Same option in long format
+$ ls --reverse
+b  a
+
+# Specify two short options
+$ ls -l -r
+total 0
+-rw-r--r-- 1 dds None 0 Dec  6 10:33 b
+-rw-r--r-- 1 dds None 0 Dec  6 10:33 a
+$ ls -lr # Combine two short options
+total 0
+-rw-r--r-- 1 dds None 0 Jan 14 07:33 b
+-rw-r--r-- 1 dds None 0 Jan 14 07:32 a
+
+# Specify short option with argument
+$ touch -t 200408132045 olympic-opening
+
+# Long option with argument
+$ touch --date=2004-08-13T20:45 olympic-opening
+$ ls -l
+
+# Get help
+# documentation for ls command
+$ man ls
+
+$ sleep --help
