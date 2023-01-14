@@ -21,3 +21,69 @@ $ cat if-1 if-2
 # Create a third file with the output of if-1 and if-2
 $ cat if-1 if-2 > if
 $ cat if
+
+# Output redirection
+## Write a line and save it on a file if-1
+$ echo If you can keep your head when all about you >if-1
+# check it out
+$ cat if-1
+# write a second line and append it to file if-1
+$ echo Are losing theirs and blaming it on you, >>if-1
+$ cat if-1
+
+# write another line ans dave it to file if-2
+$ echo If you can trust yourself when all men doubt you, >if-2
+# append a second line
+$ echo But make allowance for their doubting too. >>if-2
+$ cat if-2
+
+# read if-1 and if-2 at the same time
+$ cat if-1 if-2
+
+# Now combine the output of if-1 and if-2 on if
+$ cat if-1 if-2 >if
+$ cat if
+
+# The standard error channel
+# create a file
+$ touch afile
+# write a command to get an error
+$ ls xyzzy >output
+ls: cannot access xyzzy: No such file or directory
+# output is empty because xyzzy does not exist
+$ cat output # output is created but empty
+
+# redirect the error message to the output file
+$ ls xyzzy 2>output
+$ cat output
+ls: cannot access xyzzy: No such file or directory
+
+# redirect the the info of output to afile, the error message to error
+$ ls -l afile xyzzy >output 2>error
+$ cat output
+-rw-r--r-- 1 dds dds 0 Jan 14 20:37 afile
+$ cat error
+ls: cannot access xyzzy: No such file or directory
+
+# Paging
+# When files cannot fit on a single page
+# space to move to next page, q to exit
+$ less /usr/share/dict/words
+
+# Turn terminal to a calculator
+$ bc
+40 + 2
+42
+scale = 60
+sqrt(2)
+1.414213562373095048801688724209698078569671875376948073176679
+# to exit, press ctrl+d
+
+# Write a calculation to a file called chess-rice
+$ echo 2 ^ 64 - 1 >chess-rice
+# Now calculate it
+$ bc <chess-rice
+18446744073709551615
+
+# See the verses of the poem in if file with line numbers
+$ cat -n <if
