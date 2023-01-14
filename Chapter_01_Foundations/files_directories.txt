@@ -1,0 +1,112 @@
+# Relative paths
+## Print the current working directory
+$ pwd 
+
+# Create a directory named a
+$ mkdir a 
+# Move into directory a
+$ cd a
+$ pwd
+
+# Move up one directory level
+$ cd .. 
+
+# Move up another directory level
+$ cd .. 
+$ pwd
+/home
+$ cd ..
+$ pwd
+/
+
+# Combine directories into a path
+$ cd home/dds/a
+
+# Move up two directory levels
+$ cd ../..
+
+# Go to your home directory
+$ cd
+
+# Absolute paths
+# Move to the tmp directory under the root
+$ cd /tmp
+
+/tmp
+# Move to the home directory by absolute path
+$ cd /home/dds
+
+# Move to the root directory
+$ cd / 
+$ ls
+bin   dev  home  lost+found  mnt  proc  run   selinux  sys  usr  vol
+boot  etc  lib   media       opt  root  sbin  srv      tmp  var
+$ cd usr
+$ ls
+bin  games  include  lib  local  sbin  share  src
+
+# File manipulation commands
+# Create two files and one directory
+$ echo Ken Thompson >ken
+$ echo Dennis M. Ritchie >dmr
+$ touch a-file
+$ ls
+a-file  ken  dmr
+
+# delete a-file
+$ rm a-file
+$ ls
+ken  dmr
+
+# Rename the file from ken to KEN
+$ mv ken KEN
+$ ls
+KEN  dmr
+
+# Create a directory
+$ mkdir names
+
+# Move file into directory
+$ mv KEN names/
+
+# Move and rename file simultaneously
+$ mv dmr names/DMR
+$ ls names
+KEN  DMR
+
+# Copy KEN file to current directory from names
+$ cp names/KEN .
+$ ls
+KEN  names
+
+$ mkdir a-directory
+# Remove an empty directory
+$ rmdir a-directory
+
+# Recurse directory hierarchies
+## Create a directory and two files in it
+$ mkdir files
+$ touch files/a files/b
+
+# copy files to files 2 (failes0
+$ cp files files2
+cp: omitting directory 'files'
+$ ls
+files
+
+# Copy a directory with the recursive flag
+$ cp -r files files2
+$ ls files2
+a  b
+
+# Recursive list of current directory: shows all files and directories in current directory
+$ ls -R
+
+# Remove non-empty directories with rmdir fails
+$ rmdir files2 
+rmdir: failed to remove 'files2': Directory not empty
+
+# Remove non-empty directory with recursive and force flags
+$ rm -rf files2
+$ ls
+files
