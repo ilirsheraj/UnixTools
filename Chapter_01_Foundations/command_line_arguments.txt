@@ -79,3 +79,32 @@ $ sleep 5
 $ end=$(date +%s)
 $ echo "The process lasted $(expr $end - $start) seconds"
 The process lasted 20 seconds
+
+# Here documents
+$ cat -n <<\EOF
+> Two roads diverged in a yellow wood,
+> And sorry I could not travel both
+> And be one traveler, long I stood
+> And looked down one as far as I could
+> To where it bent in the undergrowth;
+> EOF
+     1  Two roads diverged in a yellow wood,
+     2  And sorry I could not travel both
+     3  And be one traveler, long I stood
+     4  And looked down one as far as I could
+     5  To where it bent in the undergrowth;
+     
+# Expand variables and commands
+$ cat <<end-of-message
+> From: Darth Vader <Anakin.Skywalker@death-star.gov>
+> To: Child Support Agency <info@csa.gov.uk>
+> Date: $(date -R)
+>
+> Remove me from your distribution list. - D.
+> end-of-message
+
+From: Darth Vader <Anakin.Skywalker@death-star.imperial.gov>
+To: Child Support Agency <info@csa.gov.uk>
+Date: Fri, 21 Feb 2020 13:11:11 +0200
+
+Remove me from your distribution list. - D.
