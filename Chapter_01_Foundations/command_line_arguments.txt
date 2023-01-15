@@ -18,3 +18,26 @@ $ echo store*.[a-z] # ...
 
 # All files ending in . followed by anything but b
 $ echo store*.[^b] 
+
+# Shell variables
+# Assign name to variable (be careful not to leave any space between them)
+$ name=John 
+$ surname=Smith
+# Expand variable
+$ echo $name 
+
+# Built-in variable (executable file path)
+$ echo $PATH 
+
+# Built-in variable (home directory path)
+$ echo $HOME 
+
+# Expand the variable
+$ echo Keep up with the ${surname}s 
+# Keep up with the Smiths
+
+# Read into variables four words
+$ read a b c d 
+Live free or die!
+$ echo $a:$b:$c:$d
+Live:free:or:die!
