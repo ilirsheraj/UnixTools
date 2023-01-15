@@ -1,0 +1,20 @@
+# Wildcard expansion
+# Create a bunch of files starting with store
+$ touch storeone.a storetwo.b storethree.c storeplain anotherstore
+# show everything ins the folder
+$ echo *
+
+# Match only files beginning with store and show
+$ echo store* 
+
+# All files ending in . with a single character afterwards
+$ echo *.? 
+
+# All files ending in .a or .b
+$ echo store*.[ab] 
+
+# All files ending in . followed by a lowercase letter
+$ echo store*.[a-z] # ... 
+
+# All files ending in . followed by anything but b
+$ echo store*.[^b] 
