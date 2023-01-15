@@ -41,3 +41,41 @@ $ read a b c d
 Live free or die!
 $ echo $a:$b:$c:$d
 Live:free:or:die!
+
+# Escape expansion
+# Protect content
+$ echo 'This pen costs $4.99'
+This pen costs $4.99
+
+# Protect single characters
+$ echo The pen\'s cost is \$4.99
+The pen's cost is $4.99
+
+# Expand variables
+$ echo "*** Meet $name's father ****"
+*** Meet John's father ****
+
+
+$ echo "$name \"Fridge\" $surname received \$4.99"
+John "Fridge" Smith received $4.99
+
+$ echo 'No backspaces (\) here. Go out of '\'' and use them.'
+No backspaces (\) here. Go out of ' and use them.
+$ echo 'A multi line string
+> ends here.'
+A multi line string
+ends here.
+
+
+# Command expansion
+$ echo "Today is $(date)"
+Sun Jan 15 02:46:25 AM CET 2023
+
+# Assign the result to a variable
+$ start=$(date +%s)
+$ echo $start
+1449433299
+$ sleep 5
+$ end=$(date +%s)
+$ echo "The process lasted $(expr $end - $start) seconds"
+The process lasted 20 seconds
