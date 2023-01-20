@@ -1,0 +1,58 @@
+# Create a script
+# Display date in a given time zone
+$ cat >paris-time
+#!/bin/sh
+TZ=Europe/Paris date
+
+# Invoke the shell to run the script
+$ sh paris-time 
+
+# Local time and date
+$ date
+
+# Change the mode of making the script executabld
+$ chmod +x paris-time
+# Run it by specifying its path (current directory)
+$ ./paris-time
+
+# Add current directory to path and run it without specifying a path
+$ PATH=$PATH:.
+$ paris-time
+
+# Create directory for executables
+$ mkdir $HOME/bin
+# Add directory to path
+$ PATH=$PATH:$HOME/bin
+# Move script to directory
+$ mv paris-time $HOME/bin
+# Change to another directory
+$ cd /tmp
+# Execute script while in any directory
+$ paris-time
+
+
+# Argument handling
+$ cat >any-time
+#!/bin/sh
+echo -n "The time in $1 is: "
+TZ=$1 date
+# Pass argument to script
+$ sh any-time Europe/Amsterdam
+The time in Europe/Amsterdam is...
+$ sh any-time America/Los_Angeles
+The time in America/Los_Angeles is...
+$ sh any-time Europe/Athens
+The time in Europe/Athens is...
+
+# Shell functions
+$ showtime() # Define function
+> {
+>   local TZIN=$1 # Local variables initialized from arguments
+>   local TZOUT=$2
+>   local TIME=$3
+>   echo -n "$TZIN $TIME is $TZOUT "
+>   TZ=$TZOUT date --date="TZ=\"$TZIN\" $TIME"
+> }
+# Call function
+$ showtime America/New_York Asia/Kolkata 11:45
+America/New_York 11:45 is Asia/Kolkata Fri 21 Feb 2020 10:15:00 PM IST
