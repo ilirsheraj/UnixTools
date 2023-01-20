@@ -27,43 +27,53 @@ wc: xyzzy: No such file or directory
 $ echo $?
 
 # The and operator &&
+# Create a file
 $ touch a-file
-$ cat -n a-file >b-file && rm a-file # Execute second only if first succeeds
-$ ls
-b-file
-$ cat -n bfile >cfile && rm b-file # Note typo; command will fail
+# Copy a into b and then delete a (Execute second only if first succeeds)
+$ cat -n a-file >b-file && rm a-file
+
+# Only half of the command will succeed, second is wrong
+$ cat -n bfile >cfile && rm b-file 
 cat: bfile: No such file or directory
-$ ls
-b-file  cfile
-$
-The or operator ||
+
+# The or operator ||
+# Create a file
 $ touch a-file
-$ cp a-file b-file || echo Copy failed # Command that succeeds
-$ cp afile bfile || echo Copy failed # Note typo
+# Create a command that succeeds
+$ cp a-file b-file || echo Copy failed
+# Create a command that fails
+$ cp afile bfile || echo Copy failed
 cp: cannot stat 'afile': No such file or directory
 Copy failed
-$
-The negation operator !
-$ ! date # Command that succeeds
-Fri 21 Feb 2020 01:11:49 PM EET
+
+# The negation operator !
+# Command that succeeds (but will be seen as failure because of !)
+$ ! date
+Fri Jan 20 01:15:36 AM CET 2023
 $ echo $?
 1
-$ ! ls xyzzy # Command that fails
+# Command that fails (will be seen as success)
+$ ! ls xyzzy 
 ls: cannot access xyzzy: No such file or directory
 $ echo $?
 0
-$
-Command grouping
-$ echo -n 'Today is: ' ; date # Execute two commands in a row
-Today is: Fri 21 Feb 2020 01:05:31 PM EET
-$ { echo -n 'Today is: ' ; date ; } >timestamp # Redirect output of both
+
+# Command grouping
+# Execute two commands in a row
+$ echo -n 'Today is: ' ; date
+Fri Jan 20 01:15:36 AM CET 2023
+
+# Redirect the output of both into a new file
+$ { echo -n 'Today is: ' ; date ; } >timestamp 
 $ cat timestamp
-Today is: Fri 21 Feb 2020 01:05:35 PM EET
-$ { echo -n 'Today is: ' ; date ; } | wc -c # Pipe output of both
-39
+Today is: Fri Jan 20 01:21:49 AM CET 2023
+
+# Pipe output of both
+$ { echo -n 'Today is: ' ; date ; } | wc -c
+43
+
 $ { # Group on multiple lines
 >   echo -n 'Today is: '
 >   date
 > }
-Today is: Fri 21 Feb 2020 01:05:42 PM EET
-$
+Today is: Fri Jan 20 01:25:37 AM CET 2023
