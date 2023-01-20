@@ -1,0 +1,69 @@
+# Pipelines
+# Count lines, words, characters
+$ wc /etc/motd
+  7  40 286
+ # Direct the output into a file
+$ ls /etc >files
+# count the number of words into the file
+$ wc -l <files
+
+# Pipe the two commands together
+$ ls /etc | wc -l
+
+# Do the same for files in usr folder
+$ ls /usr | cat -n
+
+# Exit code
+# Run a command that succeeds
+$ wc /etc/motd
+
+# Print exit status (zero because it succeeded)
+$ echo $? 
+
+# Run a command that fails
+$ wc xyzzy 
+wc: xyzzy: No such file or directory
+# Print exit status (non-zero)
+$ echo $?
+
+# The and operator &&
+$ touch a-file
+$ cat -n a-file >b-file && rm a-file # Execute second only if first succeeds
+$ ls
+b-file
+$ cat -n bfile >cfile && rm b-file # Note typo; command will fail
+cat: bfile: No such file or directory
+$ ls
+b-file  cfile
+$
+The or operator ||
+$ touch a-file
+$ cp a-file b-file || echo Copy failed # Command that succeeds
+$ cp afile bfile || echo Copy failed # Note typo
+cp: cannot stat 'afile': No such file or directory
+Copy failed
+$
+The negation operator !
+$ ! date # Command that succeeds
+Fri 21 Feb 2020 01:11:49 PM EET
+$ echo $?
+1
+$ ! ls xyzzy # Command that fails
+ls: cannot access xyzzy: No such file or directory
+$ echo $?
+0
+$
+Command grouping
+$ echo -n 'Today is: ' ; date # Execute two commands in a row
+Today is: Fri 21 Feb 2020 01:05:31 PM EET
+$ { echo -n 'Today is: ' ; date ; } >timestamp # Redirect output of both
+$ cat timestamp
+Today is: Fri 21 Feb 2020 01:05:35 PM EET
+$ { echo -n 'Today is: ' ; date ; } | wc -c # Pipe output of both
+39
+$ { # Group on multiple lines
+>   echo -n 'Today is: '
+>   date
+> }
+Today is: Fri 21 Feb 2020 01:05:42 PM EET
+$
