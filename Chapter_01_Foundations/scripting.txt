@@ -55,4 +55,3 @@ $ showtime() # Define function
 > }
 # Call function
 $ showtime America/New_York Asia/Kolkata 11:45
-America/New_York 11:45 is Asia/Kolkata Fri 21 Feb 2020 10:15:00 PM IST
