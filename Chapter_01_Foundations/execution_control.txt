@@ -1,0 +1,60 @@
+# Define the function to show time
+
+$ showtime() # Define function
+> {
+>   local TZIN=$1 # Local variables initialized from arguments
+>   local TZOUT=$2
+>   local TIME=$3
+>   echo -n "$TZIN $TIME is $TZOUT "
+>   TZ=$TZOUT date --date="TZ=\"$TZIN\" $TIME"
+> }
+
+# INvoke the function in a for-loop
+$ for i in Europe/London Europe/Paris Europe/Madrid ; do
+>   showtime America/Los_Angeles $i 11:45
+> done
+
+$ TZONES='America/Los_Angeles America/New_York Europe/London'
+$ for tzin in $TZONES ; do  # For all input time zones
+>   for tzout in $TZONES ; do   # For all output time zones
+>     showtime $tzin $tzout 11:45   # Show the time
+>   done
+> done
+
+# Conditionals with "if"
+# Create two files; source comes after destination, so its older
+$ touch sourcefile
+$ touch destfile
+$ if test sourcefile -nt destfile ; then  # Refresh if needed
+>   cp sourcefile destfile # Copy source to destination
+>   echo Refreshed destfile # if condition right, print Refreshed ...
+> fi # finish the for-loop
+
+# Make source newer than destination
+$ touch sourcefile
+$ if [ sourcefile -nt destfile ] ; then   # An alternative test syntax, similar to the one above
+>   cp sourcefile destfile
+>   echo Refreshed destfile
+> fi
+Refreshed destfile
+
+
+$ if [ sourcefile -nt destfile ] ; then
+>   cp sourcefile destfile
+>   echo Refreshed destfile
+> else
+>   echo destfile is up to date
+> fi
+destfile is up to date
+
+# Loops with "while"
+# Move to etc directory
+$ cd /etc
+$ ls | # List all directory entries
+> while read name ; do # For every entry
+>   if [ -f $name -a -r $name ] ; then # If regular file and readable
+>     echo -n "$name " # Display its name
+>     expr $(wc -c <$name) / $(wc -l <$name) # Display average characters per line
+>   fi
+> done |  # done is used to terminate while loop, in this case direct the output to head
+> head # Display first ten lines
