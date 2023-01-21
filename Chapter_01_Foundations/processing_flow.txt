@@ -1,0 +1,43 @@
+# CLone the linux repo from github
+
+$ git clone --mirror https://github.com/dspinellis/unix-history-repo.git
+
+# Move inside the repo
+$ cd unix-history-repo
+
+# Start the processing
+$ git log --pretty=format:%aD FreeBSD-release/10.0.0 | # Fetch commit dates
+> cut -d, -f1 | # Select the weekday
+> sort | # Bring all weekdays together
+> uniq -c | # Count weekday occurrences
+> sort -rn # Order by descending popularity
+
+###############################################
+# Same thing but in one-by-one steps
+# Fetch commit dates and show the first 10 ones
+$ git log --pretty=format:%aD FreeBSD-release/10.0.0 | # Fetch commit dates
+> head
+
+# Select only the days
+$ git log --pretty=format:%aD | # Fetch author commit dates
+> cut -d, -f1 | # Select the weekday
+> head
+
+# Sort the days alphabetically
+$ git log --pretty=format:%aD FreeBSD-release/10.0.0 | # Fetch commit dates
+> cut -d, -f1 | # Select the weekday
+> sort | # Bring all weekdays together
+> head
+
+# Count weekday occurrences
+$ git log --pretty=format:%aD FreeBSD-release/10.0.0 | # Fetch commit dates
+> cut -d, -f1 | # Select the weekday
+> sort | # Bring all weekdays together
+> uniq -c
+
+# Order by descending popularity
+$ git log --pretty=format:%aD FreeBSD-release/10.0.0 | # Fetch commit dates
+> cut -d, -f1 | # Select the weekday
+> sort | # Bring all weekdays together
+> uniq -c | # Count weekday occurrences
+> sort -rn 
